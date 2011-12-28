@@ -1,5 +1,5 @@
 Name:           tarsnap
-Version:        1.0.30
+Version:        1.0.31
 Release:        1%{?dist}
 Summary:        Online encrypted backup service (client)
 
@@ -76,6 +76,9 @@ to the key file (including the author) can read or modify archives.
 %{_mandir}/man*/tarsnap*
 
 %changelog
+* Wed Dec 28 2011 Ricky Zhou <ricky@fedoraproject.org> - 1.0.31-1
+- Upstream released a new version.
+
 * Wed Aug 25 2011 Ricky Zhou <ricky@fedoraproject.org> - 1.0.30-1
 - Upstream released a new version.
 
