@@ -1,6 +1,6 @@
 Name:           tarsnap
 Version:        1.0.32
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -76,6 +76,9 @@ to the key file (including the author) can read or modify archives.
 %{_mandir}/man*/tarsnap*
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.0.32-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Tue Mar 12 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.0.32-2
 - https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
