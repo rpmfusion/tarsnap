@@ -1,6 +1,6 @@
 Name:           tarsnap
-Version:        1.0.32
-Release:        3%{?dist}
+Version:        1.0.36.1
+Release:        1%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -29,14 +29,14 @@ Group:          Applications/Archiving
 #  - tar/getdate.c
 License:        Tarsnap License and BSD and Public Domain
 URL:            https://www.tarsnap.com/
-Source0:        https://www.tarsnap.com/download/%{name}-autoconf-%{version}.tgz
-BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+Source0:        https://www.tarsnap.com/download/tarsnap-autoconf-%{version}.tgz
 
 BuildRequires:  openssl-devel
 BuildRequires:  zlib-devel
 BuildRequires:  bzip2-devel
 BuildRequires:  xz-devel
 BuildRequires:  e2fsprogs-devel
+BuildRequires:  libattr-devel
 
 Provides:       bundled(libarchive) = 2.7.0
 
@@ -49,33 +49,49 @@ only storing it once, and cryptographically encrypts and signs archives
 using locally-held keys in order to guarantee that nobody without access
 to the key file (including the author) can read or modify archives.
 
+%package bash-completion
+Summary: Bash completion support for %{name}
+BuildArch: noarch
+Requires: bash
+%description bash-completion
+Bash completion support for the %{name}'s utilities.
 
 %prep
 %setup -q -n %{name}-autoconf-%{version}
 
-
 %build
-%configure
-%{__make} %{?_smp_mflags}
+%configure --disable-silent-rules \
+ --with-bz2lib --with-lzmadec \
+ --enable-largefile --enable-acl --disable-xattr \
+ --with-lzma --with-bash-completion-dir=%{_sysconfdir}/bash_completion.d
+make %{?_smp_mflags}
 
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} install DESTDIR=%{buildroot}
-
-
-%clean
-%{__rm} -rf %{buildroot}
-
+make install DESTDIR=%{buildroot}
 
 %files
-%defattr(-,root,root,-)
-%doc COPYING
+%license COPYING
 %config %{_sysconfdir}/tarsnap.conf.sample
 %{_bindir}/tarsnap*
 %{_mandir}/man*/tarsnap*
 
+%files bash-completion
+%license COPYING
+%dir %{_sysconfdir}/bash_completion.d
+%config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}
+%config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keygen
+%config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-recrypt
+%config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keyregen
+%config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
+
 %changelog
+* Thu Feb 25 2016 Antonio Trande <sagitter@fedoraproject.org> - 1.0.36.1-1
+- Update to 1.0.36
+- Spec cleaning
+- Use %%license
+- Made a bash_completion sub-package
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.0.32-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
@@ -91,7 +107,7 @@ to the key file (including the author) can read or modify archives.
 * Wed Dec 28 2011 Ricky Zhou <ricky@fedoraproject.org> - 1.0.31-1
 - Upstream released a new version.
 
-* Wed Aug 25 2011 Ricky Zhou <ricky@fedoraproject.org> - 1.0.30-1
+* Thu Aug 25 2011 Ricky Zhou <ricky@fedoraproject.org> - 1.0.30-1
 - Upstream released a new version.
 
 * Tue Feb 08 2011 Ricky Zhou <ricky@fedoraproject.org> - 1.0.29-1
@@ -101,5 +117,5 @@ to the key file (including the author) can read or modify archives.
 - Upstream released a new version.
 - Fixes critical security bug in data encryption code.
 
-* Fri Dec 04 2010 Ricky Zhou <ricky@fedoraproject.org> - 1.0.27-1
+* Sat Dec 04 2010 Ricky Zhou <ricky@fedoraproject.org> - 1.0.27-1
 - Initial package.
