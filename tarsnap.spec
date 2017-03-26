@@ -1,6 +1,6 @@
 Name:           tarsnap
 Version:        1.0.36.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -86,6 +86,9 @@ make install DESTDIR=%{buildroot}
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
 
 %changelog
+* Sun Mar 26 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.0.36.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Thu Feb 25 2016 Antonio Trande <sagitter@fedoraproject.org> - 1.0.36.1-1
 - Update to 1.0.36
 - Spec cleaning
