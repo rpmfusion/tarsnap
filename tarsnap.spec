@@ -42,6 +42,7 @@ BuildRequires:  bzip2-devel
 BuildRequires:  xz-devel
 BuildRequires:  e2fsprogs-devel
 BuildRequires:  libattr-devel
+BuildRequires:  automake
 
 Provides:       bundled(libarchive) = 2.7.0
 
