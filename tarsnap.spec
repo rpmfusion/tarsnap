@@ -1,6 +1,10 @@
+%global commit  4db3705fa3ce0b0d45244a51acf78f2504988400
+%global date 20170417
+%global shortcommit0 %(c=%{commit}; echo ${c:0:7})
+
 Name:           tarsnap
-Version:        1.0.36.1
-Release:        2%{?dist}
+Version:        1.0.38
+Release:        0.1%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -29,7 +33,8 @@ Group:          Applications/Archiving
 #  - tar/getdate.c
 License:        Tarsnap License and BSD and Public Domain
 URL:            https://www.tarsnap.com/
-Source0:        https://www.tarsnap.com/download/tarsnap-autoconf-%{version}.tgz
+#Source0:        https://www.tarsnap.com/download/tarsnap-autoconf-%{version}.tgz
+Source0:        https://github.com/Tarsnap/tarsnap/archive/%{commit}.tar.gz#/%{name}-%{commit}.tar.gz
 
 BuildRequires:  openssl-devel
 BuildRequires:  zlib-devel
@@ -57,18 +62,19 @@ Requires: bash
 Bash completion support for the %{name}'s utilities.
 
 %prep
-%setup -q -n %{name}-autoconf-%{version}
+%setup -q -n %{name}-%{commit}
+autoreconf -fiv
 
 %build
 %configure --disable-silent-rules \
  --with-bz2lib --with-lzmadec \
  --enable-largefile --enable-acl --disable-xattr \
  --with-lzma --with-bash-completion-dir=%{_sysconfdir}/bash_completion.d
-make %{?_smp_mflags}
+%make_build
 
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 
 %files
 %license COPYING
@@ -86,6 +92,9 @@ make install DESTDIR=%{buildroot}
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
 
 %changelog
+* Mon Apr 17 2017 Leigh Scott <leigh123linux@googlemail.com> - 1.0.38-0.1.20170417git4db3705
+- Update to git snapshot to fix OpenSSL-1.1 compatibility
+
 * Sun Mar 26 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.0.36.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
