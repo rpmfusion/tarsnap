@@ -4,7 +4,7 @@
 
 Name:           tarsnap
 Version:        1.0.38
-Release:        0.1%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:        0.2%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -93,6 +93,9 @@ autoreconf -fiv
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
 
 %changelog
+* Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.0.38-0.2.20170417git4db3705
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Mon Apr 17 2017 Leigh Scott <leigh123linux@googlemail.com> - 1.0.38-0.1.20170417git4db3705
 - Update to git snapshot to fix OpenSSL-1.1 compatibility
 
