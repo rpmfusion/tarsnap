@@ -1,10 +1,10 @@
-%global commit  4db3705fa3ce0b0d45244a51acf78f2504988400
-%global date 20170417
-%global shortcommit0 %(c=%{commit}; echo ${c:0:7})
+#global commit  4db3705fa3ce0b0d45244a51acf78f2504988400
+#global date 20170417
+#global shortcommit0 #(c=#{commit}; echo ${c:0:7})
 
 Name:           tarsnap
-Version:        1.0.38
-Release:        0.2%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Version:        1.0.39
+Release:        1%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -34,7 +34,7 @@ Group:          Applications/Archiving
 License:        Tarsnap License and BSD and Public Domain
 URL:            https://www.tarsnap.com/
 #Source0:        https://www.tarsnap.com/download/tarsnap-autoconf-%{version}.tgz
-Source0:        https://github.com/Tarsnap/tarsnap/archive/%{commit}.tar.gz#/%{name}-%{commit}.tar.gz
+Source0:        https://github.com/Tarsnap/tarsnap/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  openssl-devel
 BuildRequires:  zlib-devel
@@ -63,7 +63,7 @@ Requires: bash
 Bash completion support for the %{name}'s utilities.
 
 %prep
-%setup -q -n %{name}-%{commit}
+%setup -q -n %{name}-%{version}
 autoreconf -fiv
 
 %build
@@ -93,6 +93,9 @@ autoreconf -fiv
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
 
 %changelog
+* Sun Feb 18 2018 Sérgio Basto <sergio@serjux.com> - 1.0.39-1
+- Update to 1.0.39 (#4792)
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.0.38-0.2.20170417git4db3705
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
