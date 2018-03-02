@@ -4,7 +4,7 @@
 
 Name:           tarsnap
 Version:        1.0.39
-Release:        1%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:        2%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -93,6 +93,9 @@ autoreconf -fiv
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
 
 %changelog
+* Fri Mar 02 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 1.0.39-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Sun Feb 18 2018 Sérgio Basto <sergio@serjux.com> - 1.0.39-1
 - Update to 1.0.39 (#4792)
 
