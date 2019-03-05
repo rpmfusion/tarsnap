@@ -36,6 +36,7 @@ URL:            https://www.tarsnap.com/
 #Source0:        https://www.tarsnap.com/download/tarsnap-autoconf-%{version}.tgz
 Source0:        https://github.com/Tarsnap/tarsnap/archive/%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires:  gcc-c++
 BuildRequires:  openssl-devel
 BuildRequires:  zlib-devel
 BuildRequires:  bzip2-devel
