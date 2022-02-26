@@ -3,8 +3,8 @@
 #global shortcommit0 #(c=#{commit}; echo ${c:0:7})
 
 Name:           tarsnap
-Version:        1.0.39
-Release:        11%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Version:        1.0.40
+Release:        1%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Online encrypted backup service (client)
 
 Group:          Applications/Archiving
@@ -33,7 +33,6 @@ Group:          Applications/Archiving
 #  - tar/getdate.c
 License:        Tarsnap License and BSD and Public Domain
 URL:            https://www.tarsnap.com/
-#Source0:        https://www.tarsnap.com/download/tarsnap-autoconf-%{version}.tgz
 Source0:        https://github.com/Tarsnap/tarsnap/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  gcc-c++
@@ -94,6 +93,9 @@ autoreconf -fiv
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}-keymgmt
 
 %changelog
+* Sat Feb 26 2022 Sérgio Basto <sergio@serjux.com> - 1.0.40-1
+- Update tarsnap to 1.0.40
+
 * Thu Feb 10 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.0.39-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
